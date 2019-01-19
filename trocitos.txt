@@ -1,0 +1,4 @@
+
+CONDICION HUECO1
+
+(limitXLeftBall>hueco1X&&limitXRightBall<hueco2X)
