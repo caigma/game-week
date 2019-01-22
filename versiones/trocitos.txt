@@ -1,0 +1,104 @@
+
+CONDICION HUECO1
+
+(limitXLeftBall>hueco1X&&limitXRightBall<hueco2X)
+
+
+||((limitYball<limit2Y)&&(limitXLeftBall>hueco1X&&limitXRightBall<hueco2X)
+
+// CONDICIONES DE MOVIMIENTO HACIA ABAJO
+        if ((limitYball < limit1Y)||
+            ((limitYball > limit1Y)&&(limitYball<limit2Y)&&
+            ((limitXLeftBall>hueco1Y1X&&limitXRightBall<hueco1Y2X)||((limitXLeftBall>hueco1Y3X)&&(limitXRightBall<hueco1Y4X)))||
+            (((limitYball>limit2Y)&&(limitYball<limit3Y)&&(limitXLeftBall>hueco2Y1X&&limitXRightBall<hueco2Y2X))))) {
+        ctx.beginPath();
+        ctx.arc(xBall, limitYball-radiusBall, radiusBall, 0, 2 * Math.PI);
+        ctx.stroke();
+        limitYball+=5
+        console.log(limitYball)
+        
+        } else if (limitYball === limit1Y) {
+       
+        ctx.beginPath();
+        ctx.arc(xBall, limit1Y-radiusBall, radiusBall, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        } else if (limitYball === limit2Y){
+            ctx.beginPath();
+            ctx.arc(xBall, limit2Y-radiusBall, radiusBall, 0, 2 * Math.PI);
+            ctx.stroke();
+
+        } else if (limitYball === limit3Y){
+            ctx.beginPath();
+            ctx.arc(xBall, limit3Y-radiusBall, radiusBall, 0, 2 * Math.PI);
+            ctx.stroke();
+
+
+        }
+
+
+    }, 100)
+
+
+    document.onkeydown = function (e) {
+        //please reactivate this line should you want to see all the keycodes as you pressed keys
+        //console.log(e.keyCode)
+
+        switch (e.keyCode) {
+            
+            case 39:
+            // condicion right nivel0
+                if ((limitYball<=limit1Y)&&(limitRight>limitXRightBall)){
+                        xBall+=10
+                        limitXRightBall+=10
+                        limitXLeftBall+=10
+                        console.log("estas en nivel0 yendo a right")
+                        console.log(limitXRightBall)
+                        break;
+            // condicion right nivel1        
+                } else if(((limitYball<=limit2Y)&&(limit1Y<limitYball)&&(limitRight>limitXRightBall))&&((wall1N1>(limitXRightBall+5))||(wall1N1<(limitXLeftBall)))) {
+                    
+                        xBall+=10
+                        limitXRightBall+=10
+                        limitXLeftBall+=10
+                        console.log("estas en nivel1 yendo a right")
+                        console.log(limitXRightBall)
+                        break;
+            // condicion right nivel2           
+                } else if ((limitYball<=limit3Y)&&(limit2Y<limitYball)&&(limitRight>limitXRightBall)) {
+                    
+                    xBall+=10
+                    limitXRightBall+=10
+                    limitXLeftBall+=10
+                    console.log("estas en nivel2 yendo a right")
+                    console.log(limitXRightBall)
+                    break;
+                }
+
+                case 37:
+                // condicion left nivel0
+                if ((limitYball<=limit1Y)&&(limitLeft<limitXLeftBall)){
+                    xBall-=10
+                    limitXLeftBall-=10
+                    limitXRightBall-=10
+                    console.log("nivel 0 left")
+                    break;
+                // condicion left nivel1 
+                } else if ((limitYball<=limit2Y)&&(limit1Y<limitYball)&&(limitLeft<limitXLeftBall)&&((wall1N1<(limitXLeftBall-5))||(wall1N1>(limitXRightBall)))) {
+                    xBall-=10
+                    limitXLeftBall-=10
+                    limitXRightBall-=10
+                    
+                    console.log("nivel 1 left")
+                    break;
+                // condicion left nivel1 
+                } else if ((limit2Y<limitYball)&&(limitYball<=limit3Y)&&(limitLeft<limitXLeftBall)&&(wall1N2<limitXLeftBall)) {
+                    xBall-=10
+                    limitXLeftBall-=10
+                    limitXRightBall-=10
+                    console.log(limitLeft)
+                    console.log(limitXLeftBall)
+                    console.log("nivel 2 left")
+                    break;
+                }
+    }}

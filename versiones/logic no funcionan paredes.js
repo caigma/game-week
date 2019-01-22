@@ -18,8 +18,8 @@
     var radiusBall = 25
     var xBall = 250
     var yBall = -50
-    var limitXLeftBall = xBall - radiusBall - 5
-    var limitXRightBall = xBall + radiusBall + 5
+    var limitXLeftBall = xBall - radiusBall - 2
+    var limitXRightBall = xBall + radiusBall + 2
     var limitYball = yBall + radiusBall
     
     // ANCHO DEL HUECO
@@ -334,122 +334,42 @@
         var onlyUnderY3 = (limitYball > limitY3)
         var onlyUnderY4 = (limitYball > limitY4)
         var onlyUnderY5 = (limitYball > limitY5)
+        var condRightN0 = ((above_contactY0)&&(notTouchRight))
+        var condRightN1 = ((onlyUnderY0)&&(above_contactY1)&&(notTouchRight)&&((notWallN1X1)||(limitXRightBall>wallN1X1)))
+        var condRightN2 = ((onlyUnderY1)&&(above_contactY2)&&(notTouchRight)&&((notWallN2X1)||(limitXRightBall>wallN2X1)))
+        var condRightN3 = ((onlyUnderY2)&&(above_contactY3)&&(notTouchLeft))
+        var condRightN4 = ((onlyUnderY3)&&(above_contactY4)&&(notTouchRight)&&((notWallN4X1)||(limitXRightBall>wallN4X1)))
+        var condRightN5 = ((onlyUnderY4)&&(above_contactY5)&&((notWallN5X1)||(limitXRightBall>wallN5X1)))
+        var condLeftN0 = ((above_contactY0)&&(notTouchLeft))
+        var condLeftN1 = ((onlyUnderY0)&&(above_contactY1)&&(notTouchLeft)&&((notWallN1X1)||(limitXLeftBall<wallN1X1)))
+        var condLeftN2 = ((onlyUnderY1)&&(above_contactY2)&&(notTouchLeft)&&((notWallN2X1)||(limitXLeftBall<wallN2X1)))
+        var condLeftN3 = ((onlyUnderY2)&&(above_contactY3)&&(notTouchLeft))
+        var condLeftN4 = ((onlyUnderY3)&&(above_contactY4)&&(notTouchLeft)&&((notWallN4X1)||(limitXLeftBall<wallN4X1)))
+        var condLeftN5 = ((onlyUnderY4)&&(above_contactY5)&&(notTouchLeft)&&((notWallN5X1)||(limitXLeftBall<wallN5X1)))
 
         switch (e.keyCode) {
             case 39:
             // condicion right nivel0
-                if ((above_contactY0)&&(notTouchRight)){
-                        xBall+=10
-                        limitXRightBall+=10
-                        limitXLeftBall+=10
+                if ((condRightN0)||(condRightN1)||(condRightN2)||(condRightN3)||(condRightN4)||(condRightN5)){
+                        xBall+=5
+                        limitXRightBall+=5
+                        limitXLeftBall+=5
                         console.log("estas en nivel0 yendo a right")
                         console.log(limitXRightBall)
                         break;
-            // condicion right nivel1        
-                } else if ((onlyUnderY0)&&(above_contactY1)&&(notTouchRight)&&((notWallN1X1)||(limitXRightBall>wallN1X1))) {
-                    
-                        xBall+=10
-                        limitXRightBall+=10
-                        limitXLeftBall+=10
-                        console.log("estas en nivel1 yendo a right")
-                        break;
-            // condicion right nivel2           
-                } else if ((onlyUnderY1)&&(above_contactY2)&&(notTouchRight)&&((notWallN2X1)||(limitXRightBall>wallN2X1))) {
-                    
-                    xBall+=10
-                    limitXRightBall+=10
-                    limitXLeftBall+=10
-                    console.log("estas en nivel2 yendo a right")
-                    console.log(limitXRightBall)
-                    break;
-                
-
-                // condicion right nivel3  
-
-                } else if  ((onlyUnderY2)&&(above_contactY3)&&(notTouchLeft)) {
-                        
-                    xBall+=10
-                    limitXRightBall+=10
-                    limitXLeftBall+=10
-                    console.log("estas en nivel3 yendo a right")
-                    console.log(limitXRightBall)
-                    break;
-
-                // condicion right nivel4  
-                } else if ((onlyUnderY3)&&(above_contactY4)&&(notTouchRight)&&((notWallN4X1)||(limitXRightBall>wallN4X1))){
-                            
-                    xBall+=10
-                    limitXRightBall+=10
-                    limitXLeftBall+=10
-                    console.log("estas en nivel4 yendo a right")
-                    console.log(limitXRightBall)
-                    break;
-                
-                // condicion right nivel5  
-                } else if ((onlyUnderY4)&&(above_contactY5)&&((notWallN5X1)||(limitXRightBall>wallN5X1))) {
-                                
-                    xBall+=10
-                    limitXRightBall+=10
-                    limitXLeftBall+=10
-                    console.log("estas en nivel5 yendo a right")
-                    console.log(limitXRightBall)
-                    break;
+           
                 }
 
             case 37:
 
             // condicion left nivel0
-                if ((above_contactY0)&&(notTouchLeft)) {
-                    xBall-=10
-                    limitXLeftBall-=10
-                    limitXRightBall-=10
+                if ((condLeftN0)||(condLeftN1)||(condLeftN2)||(condLeftN3)||(condLeftN4)||(condLeftN5)) {
+                    xBall-=5
+                    limitXLeftBall-=5
+                    limitXRightBall-=5
                     console.log("nivel 0 left")
                     break;
-                // condicion left nivel1 
-                } else if ((onlyUnderY0)&&(above_contactY1)&&(notTouchLeft)&&((notWallN1X1)||(limitXLeftBall<wallN1X1))) {
-                    xBall-=10
-                    limitXLeftBall-=10
-                    limitXRightBall-=10
-                    console.log("nivel 1 left")            
-                    break;
-                // condicion left nivel2 
-                } else if ((onlyUnderY1)&&(above_contactY2)&&(notTouchLeft)&&((notWallN2X1)||(limitXLeftBall<wallN2X1))) {
-                    xBall-=10
-                    limitXLeftBall-=10
-                    limitXRightBall-=10
-                    console.log(onlyUnderY1)
-                    console.log(notWallN2X1)
-                    console.log(limitXLeftBall)
-                    console.log("nivel 2 left")
-                    break;
-                // condicion left nivel3 
-                } else if ((onlyUnderY2)&&(above_contactY3)&&(notTouchLeft)) {
-                    xBall-=10
-                    limitXLeftBall-=10
-                    limitXRightBall-=10
-                    console.log(limitLeft)
-                    console.log(limitXLeftBall)
-                    console.log("nivel 3 left")
-                    break;
-                // condicion left nivel4 
-                } else if ((onlyUnderY3)&&(above_contactY4)&&(notTouchLeft)&&((notWallN4X1)||(limitXLeftBall<wallN4X1))) {
-                    xBall-=10
-                    limitXLeftBall-=10
-                    limitXRightBall-=10
-                    console.log(limitLeft)
-                    console.log(limitXLeftBall)
-                    console.log("nivel 4 left")
-                    break;
-                // condicion left nivel5
-                } else if ((onlyUnderY4)&&(above_contactY5)&&(notTouchLeft)&&((notWallN5X1)||(limitXLeftBall<wallN5X1))) {
-                    xBall-=10
-                    limitXLeftBall-=10
-                    limitXRightBall-=10
-                    console.log(limitLeft)
-                    console.log(limitXLeftBall)
-                    console.log("nivel 5 left")
-                    break;
-
+                }
         }
     
-    }}
+    }
