@@ -7,7 +7,7 @@ function Background(game) {
     this.x = 0;
     this.y = -100;
   
-    this.dx = 3;
+    this.dx = 0.8;
   }
   
   Background.prototype.draw = function() {
@@ -19,7 +19,7 @@ function Background(game) {
     this.x -= this.dx;
   
     if (this.x < -this.game.canvas.width) this.x = 0;
+
+    this.draw();
   };
 
-
-  

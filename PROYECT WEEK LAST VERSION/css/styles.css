@@ -1,0 +1,16 @@
+
+
+body {
+
+    margin: 0;
+    padding: 0;
+    background: gray;
+}
+
+#parche {
+
+    width: 1000;
+    height: 800;
+    background: brown;
+
+}
