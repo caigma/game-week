@@ -42,20 +42,31 @@ Ball.prototype.setListeners = function() {
     document.onkeydown = function(event) {
         
         // to rigth
-            if (event.keyCode === 39) {
+            if (event.keyCode === 186) {
                 this.colisionLeft = false     
                 if (!this.colisionRight) {
                     this.x+=this.vx
                 }
             }
         // to left
-            else if (event.keyCode == 37) {
+            else if (event.keyCode == 75) {
                 this.colisionRight = false
                 if (!this.colisionLeft) {
                     this.x-=this.vx
                 }  
             } 
-        }.bind(this);
+
+            if (event.keyCode == 79) {
+                    this.y-=25
+            }  
+            
+
+            if (event.keyCode == 76) {
+                this.y+=25
+            }  
+        
+
+    }.bind(this);
                
 
 }

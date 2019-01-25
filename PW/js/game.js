@@ -22,7 +22,7 @@ var game = {
         this.ctx = this.canvas.getContext('2d')
         this.background = new Background(this)
         this.background.drawInit();
-        
+        this.setCanvasDimension();
         
         window.onkeyup = function(e) {
 
@@ -43,12 +43,19 @@ var game = {
         
         // this.canvas = document.getElementById(canvaId)
         // this.ctx = this.canvas.getContext('2d')
+       
         this.fps = 60
         this.background = new Background(this)
         this.nest = new Nest(this)
         this.bird = new Bird(this)
         this.ball = new Ball(this.ctx)
         this.life = new Life(this.ctx, this.ball.life)
+
+        var d = [[645, 395, 410, 800], [450, 495, 410, 700]]
+        
+        d.forEach((enemyBallData) => {
+            this.enemies.push(new EnemyBall(this.ctx, enemyBallData[0], enemyBallData[1], "right", enemyBallData[2], enemyBallData[3]))
+        })
         
         this.enemies.push(
             new EnemyBall(this.ctx, 645, 395, "right", 410, 800),
@@ -57,10 +64,15 @@ var game = {
             new EnemyBall(this.ctx, 425, 845, "right", 410,790),
             new EnemyBall(this.ctx, 700, 945, "right", 410,790),
             new EnemyBall(this.ctx, 650, 995, "right", 610,790),
-            new EnemyBall(this.ctx, 700, 1095, "right", 410,790))
+            new EnemyBall(this.ctx, 700, 1095, "right", 410,790),
+            new EnemyBall(this.ctx, 715, 1445, "right", 705,795),
+            new EnemyBall(this.ctx, 720, 1495, "right", 705,795),
+            new EnemyBall(this.ctx, 725, 1545, "right", 705,795),
+            new EnemyBall(this.ctx, 730, 1595, "right", 705,795),
+            new EnemyBall(this.ctx, 425, 1545, "right", 405,695),
+            new EnemyBall(this.ctx, 600, 1495, "right", 405,695))
 
         this.createBoard()
-        this.setCanvasDimension();
         this.soundbird = new Audio("img/sonidopajaros.mp3")
         this.soundbird2 = new Audio("./sonidos/pajaros.mp3")
         this.soundbird.play()
@@ -112,7 +124,7 @@ var game = {
         this.life.h += 0.1;
         }
 
-        if (this.life.h >= 0) {
+        if (this.life.h >= 0||this.ball.y>1800) {
 
             this.gameover()
 
@@ -274,9 +286,20 @@ var game = {
             new Wall(this, 600, 950, 10, 50),
             // new Wall(this, 450, 1100, 10, 50),
             // new Wall(this, 650, 1100, 10, 50),
-            new Wall(this, 800, 700, 10, 500)
-            
+            new Wall(this, 800, 700, 10, 500),
 
+            new Wall(this,450,1400,300,10 ),
+            new Wall(this, 400, 1450, 250, 10),
+            new Wall(this, 450, 1500,250, 10 ),
+            new Wall(this, 400, 1550, 250, 10),
+            new Wall(this, 450, 1600, 250, 10),
+            new Wall(this, 400, 1650, 300, 10),
+            new Wall(this, 750, 1650, 50, 10),
+            new Wall(this, 400, 1400, 10, 250),
+            new Wall(this, 700, 1400, 10, 200),
+            new Wall(this, 800, 1400, 10, 250),
+            new Wall(this, 700, 1650, 10, 50),
+            new Wall(this, 750, 1650, 10, 50),
             
         )
     },
@@ -315,16 +338,22 @@ var game = {
         // this.background.draw();
         // this.ball.draw(); 
         // this.drawScore();
+        if (this.ball.y < 1200){
+
+        
+        this.life.draw();
+        }
     },
 
     moveAll: function () {
+
+    window.scrollTo(0, this.ball.y - 200)
+    this.life.updateY(this.ball.y + 300)
     
-    if (this.ball.y>550&&this.ball.y<650){
+    
 
-        window.scrollTo(0, 600)
-
-    } else if (this.ball.y > 2500) {
-        window.scrollTo(0,2)
+    if (this.ball.y > 2500) {
+        this.gameover()
     }
         
         this.enemies.forEach(function(enemy){
@@ -350,7 +379,9 @@ var game = {
     gameover: function () {
 
         window.scrollTo(0,1)
+        
         clearInterval(this.interval)
+        this.ctx.clearRect(0, 0, this.canvas.width, 1800 )
         this.ctx.beginPath();
         this.ctx.fillStyle='#ccbba2'
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
@@ -371,8 +402,6 @@ var game = {
         this.reset()
         this.letterI = true
 
-
-
         
 
 
@@ -381,7 +410,8 @@ var game = {
     reset: function (){
         this.enemies = []
         this.score = 0
-        this.ball.life = 250
+        this.ball.life = 0
+        this.birdPosition = false
 
 
     }

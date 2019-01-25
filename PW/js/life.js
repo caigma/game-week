@@ -10,48 +10,53 @@ function Life (ctx, h) {
     
 
   }
+
+
+  Life.prototype.updateY = function (y) {
+      this.y = y
+  }
+
+  Life.prototype.getY = function () {
+      //call to g analitycs
+      return this.y
+  }
   
   Life.prototype.draw = function() {
     
     
+
     this.ctx.font = "10px Arial";
     this.ctx.fillStyle = "black";
-    this.ctx.fillText("LIFE", 324, 512);
+    this.ctx.fillText("LIFE", 324, this.y - 280);
+    var check = Math.abs(this.h)
 
-    if (this.h > -80){
+    if (check > 167){
     
         this.ctx.beginPath();
-        this.ctx.fillStyle='#EDFFCE'
-        this.ctx.fillRect(this.x,this.y,this.w,this.h)
-        
-        
+        this.ctx.fillStyle='green'
+        this.ctx.fillRect(this.x,this.y ,this.w,this.h)
         this.ctx.closePath()
 
-    } else if (this.h > -40 || this.h < -80) {
-       
+    }
+    
+    if (check > 84 && check <= 167) {
+        
         this.ctx.beginPath();
-        this.ctx.fillStyle='#EDFFCE'
+        this.ctx.fillStyle='yellow'
         this.ctx.fillRect(this.x,this.y,this.w,this.h)
-        
-        
         this.ctx.closePath()
 
-    } else if (this.h > 0 || this.h <= -40) {
+    }
+    
+    if (check <= 84) {
         this.ctx.beginPath();
-        this.ctx.fillStyle='#EDFFCE'
+        //#EDFFCE
+        this.ctx.fillStyle='red'
         this.ctx.fillRect(this.x,this.y,this.w,this.h)
-       
-       
         this.ctx.closePath()
     }
-   
-    this.ctx.font = "10px Arial";
-    this.ctx.fillStyle = "black";
-    this.ctx.fillText("LIFE", 324, 962);
-    this.ctx.beginPath();
-    this.ctx.fillStyle='#EDFFCE'
-    this.ctx.fillRect(this.x,950,this.w,this.h)
-    this.ctx.closePath()
+
+    
     
 
   };

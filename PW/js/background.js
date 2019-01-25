@@ -36,6 +36,6 @@ function Background(game) {
     if (this.x < -this.game.canvas.width) this.x = 0;
 
     this.draw();
-    this.game.life.draw();
+    
   };
 
