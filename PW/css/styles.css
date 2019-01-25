@@ -1,0 +1,17 @@
+
+
+body {
+
+    margin: 0;
+    padding: 0;
+    background :#B8D7FF;
+    /* overflow: hidden; */
+}
+
+#parche {
+
+    width: 1000;
+    height: 800;
+    background: brown;
+
+}
